@@ -1,0 +1,1 @@
+stm32_nucleo_ble_v1\startup_stm32f303xe.o: startup_stm32f303xe.s
