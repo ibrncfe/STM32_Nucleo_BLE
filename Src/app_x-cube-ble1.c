@@ -40,13 +40,13 @@
 
 #include "compiler.h"
 #include "bluenrg_utils.h"
-#include "stm32f3xx_nucleo.h"
+#include "stm32l4xx_nucleo.h"
 #include "bluenrg_gap.h"
 #include "bluenrg_gap_aci.h"
 #include "bluenrg_gatt_aci.h"
 #include "bluenrg_hal_aci.h"
 #include "sm.h"
-#include "stm32f3xx_hal_tim.h"
+#include "stm32l4xx_hal_tim.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -233,7 +233,6 @@ void MX_BlueNRG_MS_Process(void)
   
   /* USER CODE END BlueNRG_MS_Process_PreTreatment */
   
-	
   User_Process();  
   hci_user_evt_proc();
 

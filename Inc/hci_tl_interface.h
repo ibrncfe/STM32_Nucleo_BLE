@@ -30,7 +30,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx_nucleo_bus.h"
+#include "stm32l4xx_nucleo_bus.h"
 
 /* Exported Defines ----------------------------------------------------------*/
 
