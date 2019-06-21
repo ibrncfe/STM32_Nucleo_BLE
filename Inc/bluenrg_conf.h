@@ -29,7 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 
-#include "stm32l4xx_hal.h"
+#include "stm32f3xx_hal.h"
 #include <string.h>
 
 /*---------- Print messages from files at user level -----------*/

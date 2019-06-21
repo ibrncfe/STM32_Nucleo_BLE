@@ -30,26 +30,26 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32l4xx_nucleo_bus.h"
+#include "stm32f3xx_nucleo_bus.h"
 
 /* Exported Defines ----------------------------------------------------------*/
 
-#define HCI_TL_SPI_EXTI_PORT  GPIOA
-#define HCI_TL_SPI_EXTI_PIN   GPIO_PIN_0
-#define HCI_TL_SPI_EXTI_IRQn  EXTI0_IRQn
+#define HCI_TL_SPI_EXTI_PORT  GPIOD
+#define HCI_TL_SPI_EXTI_PIN   GPIO_PIN_15
+#define HCI_TL_SPI_EXTI_IRQn  EXTI15_10_IRQn
 
-#define HCI_TL_SPI_IRQ_PORT   GPIOA
-#define HCI_TL_SPI_IRQ_PIN    GPIO_PIN_0
+#define HCI_TL_SPI_IRQ_PORT   GPIOD
+#define HCI_TL_SPI_IRQ_PIN    GPIO_PIN_15
 
-#define HCI_TL_SPI_CS_PORT    GPIOA
-#define HCI_TL_SPI_CS_PIN     GPIO_PIN_1
+#define HCI_TL_SPI_CS_PORT    GPIOD
+#define HCI_TL_SPI_CS_PIN     GPIO_PIN_14
 
-#define HCI_TL_RST_PORT       GPIOA
-#define HCI_TL_RST_PIN        GPIO_PIN_8
+#define HCI_TL_RST_PORT       GPIOF
+#define HCI_TL_RST_PIN        GPIO_PIN_13
 
 /* Exported variables --------------------------------------------------------*/
-extern EXTI_HandleTypeDef     hexti0;
-#define H_EXTI_0 hexti0
+extern EXTI_HandleTypeDef     hexti15;
+#define H_EXTI_15 hexti15
 
 /* Exported Functions --------------------------------------------------------*/
 int32_t HCI_TL_SPI_Init    (void* pConf);
