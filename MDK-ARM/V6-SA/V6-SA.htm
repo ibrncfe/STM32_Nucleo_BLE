@@ -3,11 +3,11 @@
 <title>Static Call Graph - [V6-SA\V6-SA.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image V6-SA\V6-SA.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 24 15:08:18 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jun 24 16:41:52 2019
 <BR><P>
-<H3>Maximum Stack Usage =        484 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        492 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+main &rArr; MX_BlueNRG_MS_Process &rArr; Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 <P>
 <H3>
 Mutually Recursive functions
@@ -429,7 +429,7 @@ Global Symbols
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gap_init_IDB05A1
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gap_create_connection
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_le_read_local_version
 </UL>
@@ -468,12 +468,12 @@ Global Symbols
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gatt_add_char
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
 <P><STRONG><a name="[6d]"></a>Attribute_Modified_CB</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, sample_service.o(i.Attribute_Modified_CB))
-<BR><BR>[Stack]<UL><LI>Max Depth = 452<LI>Call Chain = Attribute_Modified_CB &rArr; receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<BR><BR>[Stack]<UL><LI>Max Depth = 460<LI>Call Chain = Attribute_Modified_CB &rArr; receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;receiveData
 </UL>
@@ -508,7 +508,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
 </UL>
 
 <P><STRONG><a name="[76]"></a>BSP_LED_On</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, stm32f3xx_nucleo.o(i.BSP_LED_On))
@@ -605,7 +605,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[8a]"></a>GATT_Notification_CB</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, sample_service.o(i.GATT_Notification_CB))
-<BR><BR>[Stack]<UL><LI>Max Depth = 444<LI>Call Chain = GATT_Notification_CB &rArr; receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<BR><BR>[Stack]<UL><LI>Max Depth = 452<LI>Call Chain = GATT_Notification_CB &rArr; receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;receiveData
 </UL>
@@ -619,7 +619,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HCI_TL_SPI_Reset
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Process
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -653,7 +653,7 @@ Global Symbols
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_COM_Init
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_SPI1_Init
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HCI_TL_SPI_Init
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspInit
 </UL>
 
@@ -664,18 +664,18 @@ Global Symbols
 
 <P><STRONG><a name="[78]"></a>HAL_GPIO_TogglePin</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f3xx_hal_gpio.o(i.HAL_GPIO_TogglePin))
 <BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_Toggle
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;receiveData
 </UL>
 
 <P><STRONG><a name="[74]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f3xx_hal_gpio.o(i.HAL_GPIO_WritePin))
-<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;receiveData
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_On
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_On
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_Off
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_Init
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HCI_TL_SPI_Send
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HCI_TL_SPI_Reset
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HCI_TL_SPI_Receive
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 </UL>
 
 <P><STRONG><a name="[72]"></a>HAL_GetTick</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f3xx_hal.o(i.HAL_GetTick))
@@ -697,10 +697,10 @@ Global Symbols
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_send_req
 </UL>
 
-<P><STRONG><a name="[bf]"></a>HAL_I2CEx_EnableFastModePlus</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f3xx_hal_i2c_ex.o(i.HAL_I2CEx_EnableFastModePlus))
+<P><STRONG><a name="[c0]"></a>HAL_I2CEx_EnableFastModePlus</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f3xx_hal_i2c_ex.o(i.HAL_I2CEx_EnableFastModePlus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_I2CEx_EnableFastModePlus
 </UL>
-<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 </UL>
 
 <P><STRONG><a name="[d0]"></a>HAL_IncTick</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f3xx_hal.o(i.HAL_IncTick))
@@ -736,7 +736,7 @@ Global Symbols
 <P><STRONG><a name="[7f]"></a>HAL_NVIC_EnableIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f3xx_hal_cortex.o(i.HAL_NVIC_EnableIRQ))
 <BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_PB_Init
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_tl_lowlevel_init
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_MspInit
 </UL>
 
@@ -747,7 +747,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_PB_Init
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_tl_lowlevel_init
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_MspInit
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
@@ -936,7 +936,7 @@ Global Symbols
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_CheckIdleState
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_AdvFeatureConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART3_UART_Init
+<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART3_UART_Init
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART2_UART_Init
 </UL>
 
@@ -1027,13 +1027,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ba]"></a>MX_BlueNRG_MS_Process</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, app_x-cube-ble1.o(i.MX_BlueNRG_MS_Process))
-<BR><BR>[Stack]<UL><LI>Max Depth = 452<LI>Call Chain = MX_BlueNRG_MS_Process &rArr; Process_En_Notification_BlueNRG_MS &rArr; enableNotification &rArr; aci_gatt_write_charac_descriptor &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<P><STRONG><a name="[ba]"></a>MX_BlueNRG_MS_Process</STRONG> (Thumb, 102 bytes, Stack size 24 bytes, app_x-cube-ble1.o(i.MX_BlueNRG_MS_Process))
+<BR><BR>[Stack]<UL><LI>Max Depth = 492<LI>Call Chain = MX_BlueNRG_MS_Process &rArr; Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
+<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_PB_GetState
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1062,8 +1063,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f303xe.o(RESET)
 </UL>
-<P><STRONG><a name="[c1]"></a>Mesh_Start_Listen_Connection</STRONG> (Thumb, 222 bytes, Stack size 64 bytes, app_x-cube-ble1.o(i.Mesh_Start_Listen_Connection))
-<BR><BR>[Stack]<UL><LI>Max Depth = 484<LI>Call Chain = Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<P><STRONG><a name="[bb]"></a>Mesh_Start_Listen_Connection</STRONG> (Thumb, 214 bytes, Stack size 48 bytes, app_x-cube-ble1.o(i.Mesh_Start_Listen_Connection))
+<BR><BR>[Stack]<UL><LI>Max Depth = 468<LI>Call Chain = Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_reset
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_le_set_scan_resp_data
@@ -1078,7 +1079,8 @@ Global Symbols
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Process
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[c4]"></a>Mesh_Start_P2P_Connection</STRONG> (Thumb, 276 bytes, Stack size 56 bytes, app_x-cube-ble1.o(i.Mesh_Start_P2P_Connection))
@@ -1120,7 +1122,7 @@ Global Symbols
 <P><STRONG><a name="[8]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f3xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f303xe.o(RESET)
 </UL>
-<P><STRONG><a name="[bb]"></a>Process_En_Notification_BlueNRG_MS</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, app_x-cube-ble1.o(i.Process_En_Notification_BlueNRG_MS))
+<P><STRONG><a name="[bc]"></a>Process_En_Notification_BlueNRG_MS</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, app_x-cube-ble1.o(i.Process_En_Notification_BlueNRG_MS))
 <BR><BR>[Stack]<UL><LI>Max Depth = 436<LI>Call Chain = Process_En_Notification_BlueNRG_MS &rArr; enableNotification &rArr; aci_gatt_write_charac_descriptor &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startReadTXCharHandle
@@ -1221,7 +1223,7 @@ Global Symbols
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GAP_ConnectionComplete_CB
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_notify
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1247,7 +1249,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1259,7 +1261,7 @@ Global Symbols
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1270,7 +1272,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 </UL>
 
 <P><STRONG><a name="[6c]"></a>aci_gatt_add_char</STRONG> (Thumb, 182 bytes, Stack size 112 bytes, bluenrg_gatt_aci.o(i.aci_gatt_add_char))
@@ -1311,7 +1313,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1322,7 +1324,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
 </UL>
 
 <P><STRONG><a name="[dc]"></a>aci_gatt_write_charac_descriptor</STRONG> (Thumb, 120 bytes, Stack size 184 bytes, bluenrg_gatt_aci.o(i.aci_gatt_write_charac_descriptor))
@@ -1342,7 +1344,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
+<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
 </UL>
 
 <P><STRONG><a name="[b9]"></a>aci_hal_set_tx_power_level</STRONG> (Thumb, 72 bytes, Stack size 40 bytes, bluenrg_hal_aci.o(i.aci_hal_set_tx_power_level))
@@ -1352,7 +1354,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1364,7 +1366,7 @@ Global Symbols
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1374,7 +1376,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gatt_write_charac_descriptor
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
 </UL>
 
 <P><STRONG><a name="[58]"></a>fputc</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, stm32f3xx_nucleo.o(i.fputc))
@@ -1400,7 +1402,7 @@ Global Symbols
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_init_head
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1420,7 +1422,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 </UL>
 
 <P><STRONG><a name="[e2]"></a>hci_notify_asynch_evt</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, hci_tl.o(i.hci_notify_asynch_evt))
@@ -1445,7 +1447,7 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 </UL>
 
@@ -1500,7 +1502,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> hci_tl_interface.o(i.hci_tl_lowlevel_init)
 </UL>
-<P><STRONG><a name="[bd]"></a>hci_user_evt_proc</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, hci_tl.o(i.hci_user_evt_proc))
+<P><STRONG><a name="[be]"></a>hci_user_evt_proc</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, hci_tl.o(i.hci_user_evt_proc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = hci_user_evt_proc &rArr; list_remove_head
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_remove_head
@@ -1526,14 +1528,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e1]"></a>list_insert_tail</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ble_list.o(i.list_insert_tail))
-<BR><BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
+<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_init
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_notify_asynch_evt
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_send_req
 </UL>
 
 <P><STRONG><a name="[e3]"></a>list_is_empty</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ble_list.o(i.list_is_empty))
-<BR><BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
+<BR><BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_notify_asynch_evt
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_list
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_send_req
@@ -1544,7 +1546,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;list_remove_node
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
+<BR>[Called By]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_user_evt_proc
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_notify_asynch_evt
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hci_send_req
 </UL>
@@ -1562,11 +1564,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_list
 </UL>
 
-<P><STRONG><a name="[54]"></a>main</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 484<LI>Call Chain = main &rArr; Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<P><STRONG><a name="[54]"></a>main</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 492<LI>Call Chain = main &rArr; MX_BlueNRG_MS_Process &rArr; Mesh_Start_Listen_Connection &rArr; Add_Sample_Service &rArr; aci_gatt_add_char &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_P2P_Connection
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mesh_Start_Listen_Connection
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Process
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_BlueNRG_MS_Init
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTC_Init
@@ -1574,17 +1576,17 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART3_UART_Init
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART3_UART_Init
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[6e]"></a>receiveData</STRONG> (Thumb, 86 bytes, Stack size 32 bytes, sample_service.o(i.receiveData))
-<BR><BR>[Stack]<UL><LI>Max Depth = 444<LI>Call Chain = receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<P><STRONG><a name="[6e]"></a>receiveData</STRONG> (Thumb, 98 bytes, Stack size 40 bytes, sample_service.o(i.receiveData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 452<LI>Call Chain = receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_Toggle
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_LED_Toggle
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendData
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fflush
 </UL>
@@ -1592,7 +1594,7 @@ Global Symbols
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Attribute_Modified_CB
 </UL>
 
-<P><STRONG><a name="[bc]"></a>sendData</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, sample_service.o(i.sendData))
+<P><STRONG><a name="[bd]"></a>sendData</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, sample_service.o(i.sendData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 412<LI>Call Chain = sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gatt_write_without_response
@@ -1607,7 +1609,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gatt_disc_charac_by_uuid
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
 </UL>
 
 <P><STRONG><a name="[cb]"></a>startReadTXCharHandle</STRONG> (Thumb, 50 bytes, Stack size 32 bytes, sample_service.o(i.startReadTXCharHandle))
@@ -1615,11 +1617,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aci_gatt_disc_charac_by_uuid
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
+<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Process_En_Notification_BlueNRG_MS
 </UL>
 
 <P><STRONG><a name="[57]"></a>user_notify</STRONG> (Thumb, 196 bytes, Stack size 0 bytes, sample_service.o(i.user_notify))
-<BR><BR>[Stack]<UL><LI>Max Depth = 452<LI>Call Chain = user_notify &rArr; Attribute_Modified_CB &rArr; receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
+<BR><BR>[Stack]<UL><LI>Max Depth = 460<LI>Call Chain = user_notify &rArr; Attribute_Modified_CB &rArr; receiveData &rArr; sendData &rArr; aci_gatt_update_char_value &rArr; hci_send_req &rArr; move_list &rArr; list_remove_tail
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GATT_Notification_CB
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GAP_DisconnectionComplete_CB
@@ -1634,12 +1636,12 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[be]"></a>MX_GPIO_Init</STRONG> (Thumb, 370 bytes, Stack size 64 bytes, main.o(i.MX_GPIO_Init))
+<P><STRONG><a name="[bf]"></a>MX_GPIO_Init</STRONG> (Thumb, 370 bytes, Stack size 64 bytes, main.o(i.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = MX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_EnableIRQ
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2CEx_EnableFastModePlus
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2CEx_EnableFastModePlus
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -1647,7 +1649,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c0]"></a>MX_USART3_UART_Init</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, main.o(i.MX_USART3_UART_Init))
+<P><STRONG><a name="[c1]"></a>MX_USART3_UART_Init</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, main.o(i.MX_USART3_UART_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = MX_USART3_UART_Init &rArr; HAL_UART_Init &rArr; HAL_UART_MspInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init

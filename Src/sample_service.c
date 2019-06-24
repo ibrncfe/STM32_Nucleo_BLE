@@ -59,7 +59,7 @@
  */
 /* Private variables ---------------------------------------------------------*/
 volatile int connected = FALSE;
-volatile uint8_t set_connectable = 1;
+volatile uint8_t set_connectable=1;
 volatile uint16_t connection_handle = 0;
 volatile uint8_t notification_enabled = FALSE;
 volatile uint8_t start_read_tx_char_handle = FALSE;
@@ -71,6 +71,7 @@ uint16_t tx_handle;
 uint16_t rx_handle;
 
 uint8_t Ack[1] = { '@' };
+static BOOL acknow_signal=FALSE;
 
 
 uint16_t sampleServHandle, TXCharHandle, RXCharHandle;
@@ -191,14 +192,14 @@ void startReadRXCharHandle(void)
 void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
 	BSP_LED_Toggle(LED2);
-	BOOL acknow_signal=FALSE;
+	//acknow_signal=FALSE;
 	
   for(int i = 0; i < Nb_bytes; i++) {
     printf("%c", data_buffer[i]);
 		if (data_buffer[i]=='@')
 		{
 			acknow_signal=TRUE;
-			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);
+			HAL_GPIO_TogglePin(GPIOB, LD3_Pin);		
 		}
 		else
 		{

@@ -22,25 +22,7 @@
 #include "main.h"
 #include "app_x-cube-ble1.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
+uint32_t times=0;
 
 /* Private variables ---------------------------------------------------------*/
 RTC_HandleTypeDef hrtc;
@@ -49,9 +31,7 @@ UART_HandleTypeDef huart3;
 
 PCD_HandleTypeDef hpcd_USB_FS;
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
+extern volatile uint8_t set_connectable;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -59,14 +39,7 @@ static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_PCD_Init(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -74,26 +47,13 @@ static void MX_USB_PCD_Init(void);
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-  
-
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -101,22 +61,22 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_PCD_Init();  
   MX_BlueNRG_MS_Init();
-  /* USER CODE BEGIN 2 *///////////////should be changed
 	Mesh_Start_Listen_Connection();
 	HAL_Delay(10000);
 	Mesh_Start_P2P_Connection();
-  /* USER CODE END 2 */
+	set_connectable=0;
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-	
-  MX_BlueNRG_MS_Process();
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
+		MX_BlueNRG_MS_Process();
+			
+		HAL_Delay(1);
+		if (++times==10000) 
+		{	
+			set_connectable=1;
+		} 
+		
+	}
 }
 
 /**
