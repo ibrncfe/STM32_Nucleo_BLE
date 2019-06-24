@@ -38,6 +38,6 @@
 /* Defines ------------------------------------------------------------------*/
 #define HCI_TL
 #define HCI_TL_INTERFACE
-#define SENSOR_DEMO 
+#define SAMPLE_APP 
  
 #endif /* __RTE_COMPONENTS_H__ */

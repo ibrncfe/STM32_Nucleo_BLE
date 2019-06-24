@@ -680,12 +680,12 @@ ARM Macro Assembler    Page 11
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=v5\startup_stm32f303xe.d -ov5\startup_stm32f303xe.o -I.\RTE\_V5
- -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include -IC:\Keil_v5\ARM\PACK
-\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include --predefine
-="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION
- SETA 526" --predefine="_RTE_ SETA 1" --predefine="STM32F303xE SETA 1" --list=s
-tartup_stm32f303xe.lst startup_stm32f303xe.s
+erwork --depend=v6-sa\startup_stm32f303xe.d -ov6-sa\startup_stm32f303xe.o -I.\R
+TE\_V6-SA -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include -IC:\Keil_v5
+\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include --
+predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVISIO
+N_VERSION SETA 526" --predefine="_RTE_ SETA 1" --predefine="STM32F303xE SETA 1"
+ --list=startup_stm32f303xe.lst startup_stm32f303xe.s
 
 
 

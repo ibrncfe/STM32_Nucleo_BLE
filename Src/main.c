@@ -9,10 +9,10 @@
   * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   */
@@ -99,10 +99,12 @@ int main(void)
   MX_GPIO_Init();
   MX_RTC_Init();
   MX_USART3_UART_Init();
-  MX_USB_PCD_Init();
+  MX_USB_PCD_Init();  
   MX_BlueNRG_MS_Init();
-  /* USER CODE BEGIN 2 */
-
+  /* USER CODE BEGIN 2 *///////////////should be changed
+	Mesh_Start_Listen_Connection();
+	HAL_Delay(10000);
+	Mesh_Start_P2P_Connection();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -110,7 +112,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	
   MX_BlueNRG_MS_Process();
     /* USER CODE BEGIN 3 */
   }
