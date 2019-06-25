@@ -1,6 +1,6 @@
 Dependencies for Project 'V6-SA', Target 'V6-SA': (DO NOT MODIFY !)
 F (startup_stm32f303xe.s)(0x5D0D18FB)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "STM32F303xE SETA 1"--list startup_stm32f303xe.lst --xref -o v6-sa\startup_stm32f303xe.o --depend v6-sa\startup_stm32f303xe.d)
-F (../Src/main.c)(0x5D10D31E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\main.o --omf_browse v6-sa\main.crf --depend v6-sa\main.d)
+F (../Src/main.c)(0x5D127C3F)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\main.o --omf_browse v6-sa\main.crf --depend v6-sa\main.d)
 I (../Inc/main.h)(0x5D0D18F7)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h)(0x5C65F6A4)
 I (../Inc/stm32f3xx_hal_conf.h)(0x5D0D18F7)
@@ -42,7 +42,7 @@ I (../Inc/stm32f3xx_nucleo_bus.h)(0x5D0D18F6)
 I (../Inc/stm32f3xx_nucleo_conf.h)(0x5D0D18F7)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo_errno.h)(0x5D0D18F7)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h)(0x5D0D18F7)
-I (../Inc/app_x-cube-ble1.h)(0x5D10C615)
+I (../Inc/app_x-cube-ble1.h)(0x5D127A79)
 F (../Src/hci_tl_interface.c)(0x5D0D18F6)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\hci_tl_interface.o --omf_browse v6-sa\hci_tl_interface.crf --depend v6-sa\hci_tl_interface.d)
 I (../Inc/RTE_Components.h)(0x5D0D18F7)
 I (../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic/hci_tl.h)(0x5D092C63)
@@ -125,8 +125,8 @@ I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h)(0x5C65F6A4)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h)(0x5C65F6A4)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h)(0x5C65F6A4)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h)(0x5C65F6A4)
-F (../Src/app_x-cube-ble1.c)(0x5D10D2D2)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\app_x-cube-ble1.o --omf_browse v6-sa\app_x-cube-ble1.crf --depend v6-sa\app_x-cube-ble1.d)
-I (../Inc/app_x-cube-ble1.h)(0x5D10C615)
+F (../Src/app_x-cube-ble1.c)(0x5D1281C7)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\app_x-cube-ble1.o --omf_browse v6-sa\app_x-cube-ble1.crf --depend v6-sa\app_x-cube-ble1.d)
+I (../Inc/app_x-cube-ble1.h)(0x5D127A79)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h)(0x5D0D18F7)
 I (../Inc/stm32f3xx_nucleo_conf.h)(0x5D0D18F7)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h)(0x5C65F6A4)
@@ -173,7 +173,8 @@ I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_types.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/utils/ble_list.h)(0x5D092C64)
 I (../Inc/bluenrg_conf.h)(0x5D0F6B4E)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F218C)
-I (../Inc/sample_service.h)(0x5D0D18F6)
+I (../Inc/sample_service.h)(0x5D1264A9)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599F218C)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/link_layer.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_def.h)(0x5D092C63)
@@ -189,9 +190,11 @@ I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_utils.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_aci.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h)(0x5D092C63)
-F (../Src/sample_service.c)(0x5D10D237)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\sample_service.o --omf_browse v6-sa\sample_service.crf --depend v6-sa\sample_service.d)
-I (../Inc/sample_service.h)(0x5D0D18F6)
+I (../Inc/routing.h)(0x5D124E3D)
+F (../Src/sample_service.c)(0x5D127E4B)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\sample_service.o --omf_browse v6-sa\sample_service.crf --depend v6-sa\sample_service.d)
+I (../Inc/sample_service.h)(0x5D1264A9)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599F218C)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/link_layer.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_def.h)(0x5D092C63)
@@ -249,7 +252,7 @@ I (../Inc/role_type.h)(0x5D0D18F6)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_aci.h)(0x5D092C63)
 I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h)(0x5D092C63)
-I (../Inc/app_x-cube-ble1.h)(0x5D10C615)
+I (../Inc/app_x-cube-ble1.h)(0x5D127A79)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h)(0x5D0D18F7)
 I (../Inc/main.h)(0x5D0D18F7)
 F (../Src/stm32f3xx_nucleo_bus.c)(0x5D0D18F7)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\stm32f3xx_nucleo_bus.o --omf_browse v6-sa\stm32f3xx_nucleo_bus.crf --depend v6-sa\stm32f3xx_nucleo_bus.d)
@@ -376,6 +379,68 @@ I (../Inc/stm32f3xx_nucleo_bus.h)(0x5D0D18F6)
 I (../Inc/stm32f3xx_nucleo_conf.h)(0x5D0D18F7)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo_errno.h)(0x5D0D18F7)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h)(0x5D0D18F7)
+F (..\Src\routing.c)(0x5D124D95)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\routing.o --omf_browse v6-sa\routing.crf --depend v6-sa\routing.d)
+I (../Inc/routing.h)(0x5D124E3D)
+I (../Inc/main.h)(0x5D0D18F7)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h)(0x5C65F6A4)
+I (../Inc/stm32f3xx_hal_conf.h)(0x5D0D18F7)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h)(0x5C65F6A4)
+I (../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h)(0x5C65F691)
+I (../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xe.h)(0x5C65F691)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x5C65F6A4)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F218E)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5C65F6A4)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5C65F6A4)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5C65F6A4)
+I (../Drivers/CMSIS/Include/core_cmSimd.h)(0x5C65F6A4)
+I (../Drivers/CMSIS/Device/ST/STM32F3xx/Include/system_stm32f3xx.h)(0x5C65F691)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc_ex.h)(0x5C65F6A4)
+I (../Inc/stm32f3xx_hal_exti.h)(0x5D0D18F6)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_flash.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_flash_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_i2c.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_i2c_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pcd.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pcd_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rtc.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rtc_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h)(0x5C65F6A4)
+I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h)(0x5C65F6A4)
+I (../Inc/hci_tl_interface.h)(0x5D0D18F6)
+I (../Inc/stm32f3xx_nucleo_bus.h)(0x5D0D18F6)
+I (../Inc/stm32f3xx_nucleo_conf.h)(0x5D0D18F7)
+I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo_errno.h)(0x5D0D18F7)
+I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h)(0x5D0D18F7)
+I (../Inc/app_x-cube-ble1.h)(0x5D127A79)
+I (../Middlewares/ST/BlueNRG-MS/includes/link_layer.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_def.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_types.h)(0x5D092C63)
+I (../Inc/sample_service.h)(0x5D1264A9)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599F218C)
+I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_aci_const.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/hci_const.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic/hci_tl.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/utils/ble_list.h)(0x5D092C64)
+I (../Inc/bluenrg_conf.h)(0x5D0F6B4E)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F218C)
+I (../Middlewares/ST/BlueNRG-MS/includes/compiler.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_server.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/hci.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/hci_le.h)(0x5D092C63)
+I (../Middlewares/ST/BlueNRG-MS/includes/sm.h)(0x5D092C63)
+I (../Inc/role_type.h)(0x5D0D18F6)
 F (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.c)(0x5D0D18F7)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\stm32f3xx_nucleo.o --omf_browse v6-sa\stm32f3xx_nucleo.crf --depend v6-sa\stm32f3xx_nucleo.d)
 I (../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h)(0x5D0D18F7)
 I (../Inc/stm32f3xx_nucleo_conf.h)(0x5D0D18F7)
@@ -742,7 +807,7 @@ I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h)(0x5C65F6A4)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h)(0x5C65F6A4)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h)(0x5C65F6A4)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h)(0x5C65F6A4)
-F (../Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd_ex.c)(0x5C65F6A5)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\stm32f3xx_hal_pcd_ex.o --omf_browse v6-sa\stm32f3xx_hal_pcd_ex.crf --depend v6-sa\stm32f3xx_hal_pcd_ex.d)
+F (../Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pcd_ex.c)(0x5D12692F)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/BSP/STM32F3xx_Nucleo -I ../Drivers/STM32F3xx_HAL_Driver/Inc -I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/ST/BlueNRG-MS/includes -I ../Middlewares/ST/BlueNRG-MS/hci/hci_tl_patterns/Basic -I ../Middlewares/ST/BlueNRG-MS/utils-I.\RTE\_V6-SA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F3xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F3xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F303xE -DUSE_HAL_DRIVER -DSTM32F303xE-o v6-sa\stm32f3xx_hal_pcd_ex.o --omf_browse v6-sa\stm32f3xx_hal_pcd_ex.crf --depend v6-sa\stm32f3xx_hal_pcd_ex.d)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h)(0x5C65F6A4)
 I (../Inc/stm32f3xx_hal_conf.h)(0x5D0D18F7)
 I (../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h)(0x5C65F6A4)

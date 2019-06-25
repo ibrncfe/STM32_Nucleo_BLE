@@ -30,7 +30,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "app_x-cube-ble1.h"
-
 #include "hci_tl.h"
 #include "sample_service.h"
 #include "role_type.h"
@@ -39,28 +38,27 @@
 #include "bluenrg_gap_aci.h"
 #include "bluenrg_gatt_aci.h"
 #include "bluenrg_hal_aci.h"
-
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private defines -----------------------------------------------------------*/
-/**
- * Define the role here only if it is not already defined in the project options
- * For the CLIENT_ROLE comment the line below 
- * For the SERVER_ROLE uncomment the line below
- */
+#include "routing.h"
 
 #define BDADDR_SIZE 6
+
 #define Working 0 
 #define Failed 1 
 #define Freezed 2 
+
+#define MaxNodes 3
+
+//should be changed and in header
+const tBDAddr local_address[] = { 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+const char local_name[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','1' };
+//const static uint8_t NodeNum=2;
 
 uint8_t bnrg_expansion_board = IDB04A1; /* at startup, suppose the X-NUCLEO-IDB04A1 is used */  
 static volatile uint8_t user_button_init_state = 1;
 static volatile uint8_t user_button_pressed = 0;
 
 BLE_RoleTypeDef BLE_Role = SERVER;
+uint8_t bdaddr[BDADDR_SIZE];
 
 extern volatile uint8_t set_connectable;
 extern volatile int     connected;
@@ -69,49 +67,30 @@ extern volatile uint8_t notification_enabled;
 extern volatile uint8_t end_read_tx_char_handle;
 extern volatile uint8_t end_read_rx_char_handle;
 
-uint8_t bdaddr[BDADDR_SIZE];
-
-const tBDAddr local_address[] = { 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
-const char local_name[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','1' };
+//struct Node
+//{
+//	char* name;
+//	int num;
+//	int state;
+//	const tBDAddr* addr;
+//	char* local_name;
+//	int distance;
+//}Node;
 
 uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
 
-struct Node
-{
-	char* name;
-	int num;
-	int state;
-	const tBDAddr* addr;
-	char* local_name;
-	int distance;
-}Node;
-
-
-
-static struct Node local;
-static struct Node remote;
+//static struct Node local;
+//static struct Node remote;
 ////////////////////////////////////////////////////////////////////////
 
 /* Define Functions  -----------------------------------------------*/
 static void User_Init(void);
 
-void initialize_Node(void)
-{
-	local.name="Node 1";
-	local.num=1;
-	local.state=Freezed;
-	local.addr=local_address;
-	local.distance=NULL;
-	
-	remote.name="Unknown";
-	remote.num=99;
-	remote.state=Freezed;
-	remote.addr=NULL;
-	remote.distance=NULL;
-}
 
-
-void MX_BlueNRG_MS_Init(void)
+/*
+ * BlueNRG-MS Initialization task
+ */
+void Process_BlueNRG_MS_Init(void)
 {
   uint8_t  hwVersion;
   uint16_t fwVersion;
@@ -202,10 +181,9 @@ void MX_BlueNRG_MS_Init(void)
  * @param  None
  * @retval None
  */
-void Mesh_Start_Listen_Connection(void)
+void Process_Mesh_Start_Listen_Connection(void)
 {
   /* Initialize the peripherals and the BLE Stack */
-  
   int ret;
   
   hci_init(user_notify, NULL);
@@ -278,7 +256,7 @@ void Mesh_Start_Listen_Connection(void)
  * @param  None
  * @retval None
  */
-void Mesh_Start_P2P_Connection(void)
+void Process_Mesh_Start_BlueNRG_Connection(void)
 {
 	int ret;
 
@@ -368,7 +346,7 @@ void Mesh_Start_P2P_Connection(void)
  * @param  None
  * @retval None
  */
-void Process_En_Notification_BlueNRG_MS(void)
+void Process_Enable_Notification_BlueNRG_MS(void)
 {
 	//enable send and receive functions
 	/* Start TX handle Characteristic dynamic discovery if not yet done */
@@ -389,7 +367,8 @@ void Process_En_Notification_BlueNRG_MS(void)
 	
 }
 
-void Routing_BlueNRG_MS(void) //1
+
+void Process_Routing_BlueNRG_MS(void) //1
 {
 /*
 NODE1	
@@ -398,28 +377,29 @@ NODE1
 NODE2
 {'N','O','D','E','N','R','G','_','0','0','0','1'};
 {0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa};
-	
+NODE3
+{'N','O','D','E','N','R','G','_','0','0','0','1'};
+{0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa};	
 	
 	
 */
 }
 
-	
-	
 /*
  * BlueNRG-MS background task
  */
-void MX_BlueNRG_MS_Process(void)
+void Process_BlueNRG_MS(void)
 {
   if (set_connectable) 
   {
-		Mesh_Start_Listen_Connection();
+		//should be changed
+		Process_Mesh_Start_Listen_Connection();
     set_connectable = FALSE;
     user_button_init_state = BSP_PB_GetState(BUTTON_KEY);
   }
 	
 	//THIS EMULATE THE PROCEDURE OF START CONTROL
-	Process_En_Notification_BlueNRG_MS();
+	Process_Enable_Notification_BlueNRG_MS();
 
 
   /* Check if the User Button has been pushed */
@@ -438,7 +418,8 @@ void MX_BlueNRG_MS_Process(void)
     {
 			/* Send a toggle command to the remote device */
       uint8_t data[1] = {'p'};
-      sendData(data, sizeof(data));
+			Process_frame_formulation(1,3,data,sizeof(data));
+      //sendData(data, sizeof(data));
     }
     
     /* Reset the User Button flag */

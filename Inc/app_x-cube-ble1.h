@@ -33,11 +33,17 @@
 #include "stm32f3xx_nucleo.h"
 
 /* Exported Functions --------------------------------------------------------*/
-void MX_BlueNRG_MS_Init(void);
-void MX_BlueNRG_MS_Process(void);
-void Mesh_Start_Listen_Connection(void);
-void Mesh_Start_P2P_Connection(void);
- 
+void Process_BlueNRG_MS_Init(void);
+void Process_Initialization_Nodes(void);
+void Process_Enable_Notification_BlueNRG_MS(void);
+void Process_Routing_BlueNRG_MS(void);
+void Process_Mesh_Start_BlueNRG_Connection(void);
+void Process_Mesh_Start_Listen_Connection(void);
+void Process_BlueNRG_MS(void);
+
+const static uint8_t NodeNum=2;
+
+
 #ifdef __cplusplus
 }
 #endif

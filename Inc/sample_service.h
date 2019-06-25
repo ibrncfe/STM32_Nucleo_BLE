@@ -45,7 +45,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "bluenrg_gap.h"
 #include "bluenrg_aci_const.h"
 #include "hci.h"
@@ -71,6 +71,8 @@
  */
 #define IDB04A1 0
 #define IDB05A1 1
+
+typedef uint8_t fPrccStatus;
    
 /** 
 * @brief Handle of TX Characteristic on the Server. The handle should be
@@ -105,6 +107,12 @@ void GAP_DisconnectionComplete_CB(void);
 void GATT_Notification_CB(uint16_t attr_handle, uint8_t attr_len,
                           uint8_t *attr_value);
 void user_notify(void * pData);
+fPrccStatus Process_frame_formulation(uint8_t Currentnum, uint8_t Targetnum, uint8_t* data_buffer, uint8_t Nb_bytes);
+fPrccStatus Process_frame_Deformulation(uint8_t* SenderNum, uint8_t* TargetNum, uint8_t* frame_buffer, uint8_t Nb_bytes);
+fPrccStatus GettingData(uint8_t* data_buffer, uint8_t Nb_bytes);
+fPrccStatus ForwardFrame(uint8_t* data_buffer, uint8_t Nb_bytes);
+
+
 /**
  * @}
  */

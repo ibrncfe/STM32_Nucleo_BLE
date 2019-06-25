@@ -1,6 +1,7 @@
 v6-sa\sample_service.o: ../Src/sample_service.c
 v6-sa\sample_service.o: ../Inc/sample_service.h
 v6-sa\sample_service.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+v6-sa\sample_service.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 v6-sa\sample_service.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap.h
 v6-sa\sample_service.o: ../Middlewares/ST/BlueNRG-MS/includes/link_layer.h
 v6-sa\sample_service.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_def.h

@@ -8,6 +8,7 @@
 "v6-sa\stm32f3xx_nucleo_bus.o"
 "v6-sa\stm32f3xx_it.o"
 "v6-sa\stm32f3xx_hal_msp.o"
+"v6-sa\routing.o"
 "v6-sa\stm32f3xx_nucleo.o"
 "v6-sa\stm32f3xx_hal_spi.o"
 "v6-sa\stm32f3xx_hal_spi_ex.o"

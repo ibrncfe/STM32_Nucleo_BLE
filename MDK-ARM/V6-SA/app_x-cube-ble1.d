@@ -49,6 +49,7 @@ v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/utils/ble_list.h
 v6-sa\app_x-cube-ble1.o: ../Inc/bluenrg_conf.h
 v6-sa\app_x-cube-ble1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 v6-sa\app_x-cube-ble1.o: ../Inc/sample_service.h
+v6-sa\app_x-cube-ble1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap.h
 v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/link_layer.h
 v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_def.h
@@ -64,3 +65,4 @@ v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_utils.h
 v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h
 v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_aci.h
 v6-sa\app_x-cube-ble1.o: ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h
+v6-sa\app_x-cube-ble1.o: ../Inc/routing.h

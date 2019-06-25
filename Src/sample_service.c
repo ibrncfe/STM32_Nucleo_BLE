@@ -39,24 +39,11 @@
 #include "bluenrg_gap_aci.h"
 #include "bluenrg_gatt_aci.h"
 #include "bluenrg_hal_aci.h"
-
 #include "app_x-cube-ble1.h"
 
-/** @addtogroup Applications
- *  @{
- */
+#define FRM_OK              1
+#define FRM_ERR             0
 
-/** @addtogroup SampleAppThT
- *  @{
- */
- 
-/** @defgroup SAMPLE_SERVICE 
- * @{
- */
-
-/** @defgroup SAMPLE_SERVICE_Private_Variables
- * @{
- */
 /* Private variables ---------------------------------------------------------*/
 volatile int connected = FALSE;
 volatile uint8_t set_connectable=1;
@@ -72,7 +59,7 @@ uint16_t rx_handle;
 
 uint8_t Ack[1] = { '@' };
 static BOOL acknow_signal=FALSE;
-
+volatile BOOL forward_routing=FALSE;
 
 uint16_t sampleServHandle, TXCharHandle, RXCharHandle;
 
@@ -193,25 +180,149 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
 	BSP_LED_Toggle(LED2);
 	//acknow_signal=FALSE;
+	uint8_t SenderNum=0;
+	uint8_t DestNum=0;
+	forward_routing=FALSE;
 	
   for(int i = 0; i < Nb_bytes; i++) {
     printf("%c", data_buffer[i]);
 		if (data_buffer[i]=='@')
 		{
+			//acknowledgment signal reachout 
+			forward_routing=FALSE;
 			acknow_signal=TRUE;
-			HAL_GPIO_TogglePin(GPIOB, LD3_Pin);		
+			//add return
 		}
-		else
+	}
+	//normal frame comming
+	if(!acknow_signal)
+	{
+		//checking if it be forwarded or just getting it out
+		if (Process_frame_Deformulation(&SenderNum, &DestNum, data_buffer, Nb_bytes))
 		{
-			acknow_signal=FALSE;
+			HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
+
+			//getting frame
+			if (DestNum==NodeNum)
+			{
+				forward_routing=FALSE;
+				GettingData(data_buffer, Nb_bytes);
+				
+			
+			}
+			else //forward it
+			{
+				forward_routing=TRUE;
+				ForwardFrame(data_buffer, Nb_bytes);	
+			}
 		}
+		
+		
   }
 	if(!acknow_signal)
 	{
 		sendData(Ack, sizeof(Ack));
+		acknow_signal=FALSE;
 	}
 	fflush(stdout);
 }
+
+/**
+ * @brief  This function is used to formulate a mesh frame 
+ *         (to be sent over the air to the remote board).
+ * @param  data_buffer : pointer to data to be sent
+ * @param  Nb_bytes : number of bytes to send
+ * @retval None
+ */
+fPrccStatus ForwardFrame(uint8_t* data_buffer, uint8_t Nb_bytes)
+{
+	
+	return FRM_OK;	
+}
+
+/**
+ * @brief  This function is used to formulate a mesh frame 
+ *         (to be sent over the air to the remote board).
+ * @param  data_buffer : pointer to data to be sent
+ * @param  Nb_bytes : number of bytes to send
+ * @retval None
+ */
+fPrccStatus GettingData(uint8_t* data_buffer, uint8_t Nb_bytes)
+{
+	HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
+
+	return FRM_OK;
+}
+/**
+ * @brief  This function is used to formulate a mesh frame 
+ *         (to be sent over the air to the remote board).
+ * @param  data_buffer : pointer to data to be sent
+ * @param  Nb_bytes : number of bytes to send
+ * @retval None
+ */
+fPrccStatus Process_frame_formulation(uint8_t Currentnum, uint8_t Targetnum, uint8_t* data_buffer, uint8_t Nb_bytes)
+{
+/*
+| # | source addr | # | destination addr | # | data | *
+length = 1+1+1+1+1+data_buffer+1=6+Nb_bytes
+*/
+	if (Targetnum == 0 || Currentnum == 0 || Targetnum == Currentnum)
+	{
+		HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);
+		return FRM_ERR;
+	}
+
+	const uint8_t sz = Nb_bytes + 6;
+//	const uint8_t preamble = '#';
+//	const uint8_t trail = '*';
+	int i = 0;
+	
+	uint8_t fr[] = { '#' , Currentnum + '0' ,'#' , Targetnum + '0', '#' };
+	uint8_t n = sizeof(fr);
+	uint8_t* A = (uint8_t *) malloc(sz * sizeof(uint8_t));
+	for (i = 0; i < n; ++i)
+		A[i] = fr[i];
+	for (i = 0; i < Nb_bytes; ++i)
+		A[i+ n] = data_buffer[i];
+	A[sz-1] = '*';
+
+	sendData(A,sz);
+	
+	free(A);
+	
+	return FRM_OK;
+}
+
+/**
+ * @brief  This function is used to formulate a mesh frame 
+ *         (to be sent over the air to the remote board).
+ * @param  data_buffer : pointer to data to be sent
+ * @param  Nb_bytes : number of bytes to send
+ * @retval None
+ */
+fPrccStatus Process_frame_Deformulation(uint8_t* SenderNum, uint8_t* TargetNum, uint8_t* frame_buffer, uint8_t Nb_bytes)
+{
+ /*
+ | # | source addr | # | destination addr | # | data | *
+ length = 1+1+1+1+1+data_buffer+1=6+Nb_bytes
+ */
+	int o = 0;
+	for (int i = 0; i < Nb_bytes; ++i)
+	{
+	 if (frame_buffer[i] == '#')
+		 o++;
+	}
+
+	if (o != 3 || frame_buffer[Nb_bytes-1]!='*')
+	 return FRM_ERR;
+
+	*SenderNum = frame_buffer[1];
+	*TargetNum = frame_buffer[3];
+
+
+	return FRM_OK;
+}
+
 
 /**
  * @brief  This function is used to send data related to the sample service

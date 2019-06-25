@@ -5,17 +5,9 @@
   * @brief          : Main program body
   ******************************************************************************
   * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
+  * NODE1
   ******************************************************************************
-  */
+  */ 
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -60,15 +52,15 @@ int main(void)
   MX_RTC_Init();
   MX_USART3_UART_Init();
   MX_USB_PCD_Init();  
-  MX_BlueNRG_MS_Init();
-	Mesh_Start_Listen_Connection();
+  Process_BlueNRG_MS_Init();
+	Process_Mesh_Start_Listen_Connection();
 	HAL_Delay(10000);
-	Mesh_Start_P2P_Connection();
+	Process_Mesh_Start_BlueNRG_Connection();
 	set_connectable=0;
 
   while (1)
   {
-		MX_BlueNRG_MS_Process();
+		Process_BlueNRG_MS();
 			
 		HAL_Delay(1);
 		if (++times==10000) 
