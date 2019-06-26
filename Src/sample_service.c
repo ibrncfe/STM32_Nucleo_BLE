@@ -40,6 +40,8 @@
 #include "bluenrg_gatt_aci.h"
 #include "bluenrg_hal_aci.h"
 #include "app_x-cube-ble1.h"
+#include "routing.h"
+
 
 #define FRM_OK              1
 #define FRM_ERR             0
@@ -62,6 +64,7 @@ static BOOL acknow_signal=FALSE;
 volatile BOOL forward_routing=FALSE;
 
 uint16_t sampleServHandle, TXCharHandle, RXCharHandle;
+
 
 extern uint8_t bnrg_expansion_board;
 extern BLE_RoleTypeDef BLE_Role;
@@ -86,7 +89,8 @@ extern BLE_RoleTypeDef BLE_Role;
 
 /** @defgroup SAMPLE_SERVICE_Exported_Functions 
  * @{
- */ 
+ */
+ 
 /**
  * @brief  Add a sample service using a vendor specific profile
  * @param  None
@@ -205,7 +209,7 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 		{
 
 			//getting frame STATE 3
-			if (DestNum==NodeNum)
+			if (DestNum==NodeNum+'0')
 			{
 				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
 				forward_routing=FALSE;
@@ -242,7 +246,7 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
  */
 fPrccStatus ForwardFrame(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
-	Process_Mesh_Start_Listen_Connection();
+	//Process_Mesh_Start_Listen_Connection();
 
 
 	return FRM_OK;	
@@ -260,6 +264,10 @@ fPrccStatus GettingData(uint8_t* data_buffer, uint8_t Nb_bytes)
 
 	return FRM_OK;
 }
+
+
+
+
 /**
  * @brief  This function is used to formulate a mesh frame 
  *         (to be sent over the air to the remote board).

@@ -64,3 +64,4 @@ v6-sa\sample_service.o: ../Inc/app_x-cube-ble1.h
 v6-sa\sample_service.o: ../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h
 v6-sa\sample_service.o: ../Inc/main.h
 v6-sa\sample_service.o: ../Drivers/BSP/STM32F3xx_Nucleo/stm32f3xx_nucleo.h
+v6-sa\sample_service.o: ../Inc/routing.h

@@ -47,6 +47,9 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
+	/* Initialize Nodes*/
+	initialize_Node();
+	
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_RTC_Init();
@@ -65,7 +68,7 @@ int main(void)
 		HAL_Delay(1);
 		if (++times==10000) 
 		{	
-			set_connectable=1;
+			set_connectable=0;
 		} 
 		
 	}

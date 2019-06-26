@@ -40,8 +40,9 @@ void Process_Routing_BlueNRG_MS(void);
 void Process_Mesh_Start_BlueNRG_Connection(void);
 void Process_Mesh_Start_Listen_Connection(void);
 void Process_BlueNRG_MS(void);
+static void User_Init(void);
 
-const static uint8_t NodeNum='1';
+const static uint8_t NodeNum=1;
 
 
 #ifdef __cplusplus

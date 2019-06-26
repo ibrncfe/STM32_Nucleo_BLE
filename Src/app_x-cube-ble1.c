@@ -5,20 +5,6 @@
   *             
   ******************************************************************************
   *
-  * COPYRIGHT 2019 STMicroelectronics
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  ******************************************************************************
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -40,18 +26,37 @@
 #include "bluenrg_hal_aci.h"
 #include "routing.h"
 
-#define BDADDR_SIZE 6
+#define maxNodes	(4)
+
+
+
 
 #define Working 0 
 #define Failed 1 
 #define Freezed 2 
 
-#define MaxNodes 3
+#define LOCAL_NODE 1
+#define NAME_NODE_SIZE (13)
+#define BDADDR_SIZE 6
+
+tBDAddr LOCAL_ADDR[]={ 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+char LOCAL_NAME[NAME_NODE_SIZE];
+
+
+tBDAddr Node_address_1[] = { 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+const char Node_name_1[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','1' };
+
+tBDAddr Node_address_2[] = { 0x02, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+const char Node_name_2[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','2' };
+
+tBDAddr Node_address_3[] = { 0x03, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+const char Node_name_3[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','3' };
+
+
 
 //should be changed and in header
-const tBDAddr local_address[] = { 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
-const char local_name[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','1' };
-//const static uint8_t NodeNum=2;
+//tBDAddr local_address[] = { 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+//const char local_name[] = { AD_TYPE_COMPLETE_LOCAL_NAME, 'N','O','D','E','N','R','G','_','0','0','0','1' };
 
 uint8_t bnrg_expansion_board = IDB04A1; /* at startup, suppose the X-NUCLEO-IDB04A1 is used */  
 static volatile uint8_t user_button_init_state = 1;
@@ -67,26 +72,24 @@ extern volatile uint8_t notification_enabled;
 extern volatile uint8_t end_read_tx_char_handle;
 extern volatile uint8_t end_read_rx_char_handle;
 
-//struct Node
-//{
-//	char* name;
-//	int num;
-//	int state;
-//	const tBDAddr* addr;
-//	char* local_name;
-//	int distance;
-//}Node;
-
 uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
 
-//static struct Node local;
-//static struct Node remote;
-////////////////////////////////////////////////////////////////////////
+
+typedef struct Node
+{
+	const char* name;
+	uint8_t num;
+	int state;
+	tBDAddr* addr;
+	const char* local_name;
+	int distance;
+	int connected[maxNodes-1];
+}Node;
+
+
+struct Node nodes[4];
 
 /* Define Functions  -----------------------------------------------*/
-static void User_Init(void);
-
-
 /*
  * BlueNRG-MS Initialization task
  */
@@ -106,12 +109,6 @@ void Process_BlueNRG_MS_Init(void)
   /* get the BlueNRG HW and FW versions */
   getBlueNRGVersion(&hwVersion, &fwVersion);
 
-  /* 
-   * Reset BlueNRG again otherwise we won't
-   * be able to change its MAC address.
-   * aci_hal_write_config_data() must be the first
-   * command after reset otherwise it will fail.
-   */
   hci_reset();
   
   HAL_Delay(100);
@@ -122,7 +119,7 @@ void Process_BlueNRG_MS_Init(void)
     bnrg_expansion_board = IDB05A1; 
   }
   
-	BLUENRG_memcpy(bdaddr, local_address, sizeof(local_address));
+	BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
 
   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
                                   CONFIG_DATA_PUBADDR_LEN,
@@ -192,7 +189,7 @@ void Process_Mesh_Start_Listen_Connection(void)
   
   HAL_Delay(100);
   
-	BLUENRG_memcpy(bdaddr, local_address, sizeof(local_address));
+	BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
 
   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
                                   CONFIG_DATA_PUBADDR_LEN,
@@ -246,7 +243,7 @@ void Process_Mesh_Start_Listen_Connection(void)
 	Slave_Conn_Interval_Max
 	*/
 	ret = aci_gap_set_discoverable(ADV_DATA_TYPE, ADV_INTERV_MIN, ADV_INTERV_MAX, PUBLIC_ADDR, 
-																 NO_WHITE_LIST_USE, 13, local_name, 0, NULL, 0, 0);
+																 NO_WHITE_LIST_USE, 13, LOCAL_NAME, 0, NULL, 0, 0);
 	PRINTF("%d\n",ret);  
 }
 
@@ -266,7 +263,7 @@ void Process_Mesh_Start_BlueNRG_Connection(void)
   
   HAL_Delay(100);
     
-  BLUENRG_memcpy(bdaddr, local_address, sizeof(local_address));
+  BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
  
 	ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
                                   CONFIG_DATA_PUBADDR_LEN,
@@ -367,7 +364,12 @@ void Process_Enable_Notification_BlueNRG_MS(void)
 	
 }
 
-
+/**
+ * @brief  Initilization the notification Communication 1
+ *
+ * @param  None
+ * @retval None
+ */
 void Process_Routing_BlueNRG_MS(void) //1
 {
 /*
@@ -418,7 +420,7 @@ void Process_BlueNRG_MS(void)
     {
 			/* Send a toggle command to the remote device */
       uint8_t data[1] = {'p'};
-			Process_frame_formulation(1,3,data,sizeof(data));
+			Process_frame_formulation(1,2,data,sizeof(data));
       //sendData(data, sizeof(data));
     }
     
