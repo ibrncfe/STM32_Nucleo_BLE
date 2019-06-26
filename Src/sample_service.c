@@ -178,7 +178,7 @@ void startReadRXCharHandle(void)
  */
 void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
-	BSP_LED_Toggle(LED2);
+	HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	
 	//acknow_signal=FALSE;
 	uint8_t SenderNum=0;
 	uint8_t DestNum=0;
@@ -188,7 +188,10 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
     printf("%c", data_buffer[i]);
 		if (data_buffer[i]=='@')
 		{
-			//acknowledgment signal reachout 
+			//acknowledgment signal reachout STATE 2 
+			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
+			HAL_Delay(1000);
+			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	
 			forward_routing=FALSE;
 			acknow_signal=TRUE;
 			//add return
@@ -197,21 +200,24 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 	//normal frame comming
 	if(!acknow_signal)
 	{
-		//checking if it be forwarded or just getting it out
+		//checking if it be forwarded or just getting it out 
 		if (Process_frame_Deformulation(&SenderNum, &DestNum, data_buffer, Nb_bytes))
 		{
-			HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
 
-			//getting frame
+			//getting frame STATE 3
 			if (DestNum==NodeNum)
 			{
+				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
 				forward_routing=FALSE;
 				GettingData(data_buffer, Nb_bytes);
 				
 			
 			}
-			else //forward it
+			else //forward it STATE 1
 			{
+				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);				
+				HAL_Delay(2000);
+				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	
 				forward_routing=TRUE;
 				ForwardFrame(data_buffer, Nb_bytes);	
 			}
@@ -236,7 +242,9 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
  */
 fPrccStatus ForwardFrame(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
-	
+	Process_Mesh_Start_Listen_Connection();
+
+
 	return FRM_OK;	
 }
 
@@ -249,7 +257,6 @@ fPrccStatus ForwardFrame(uint8_t* data_buffer, uint8_t Nb_bytes)
  */
 fPrccStatus GettingData(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
-	HAL_GPIO_TogglePin(GPIOB, LD3_Pin);
 
 	return FRM_OK;
 }
