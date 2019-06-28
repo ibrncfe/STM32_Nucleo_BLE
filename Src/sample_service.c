@@ -43,8 +43,7 @@
 #include "routing.h"
 
 
-#define FRM_OK              1
-#define FRM_ERR             0
+
 
 /* Private variables ---------------------------------------------------------*/
 volatile int connected = FALSE;
@@ -55,7 +54,9 @@ volatile uint8_t start_read_tx_char_handle = FALSE;
 volatile uint8_t start_read_rx_char_handle = FALSE;
 volatile uint8_t end_read_tx_char_handle = FALSE;
 volatile uint8_t end_read_rx_char_handle = FALSE;
-
+uint16_t conn_handle;
+uint8_t reason;
+uint8_t ret;
 uint16_t tx_handle;
 uint16_t rx_handle;
 
@@ -182,58 +183,64 @@ void startReadRXCharHandle(void)
  */
 void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 {
-	HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	
-	//acknow_signal=FALSE;
 	uint8_t SenderNum=0;
 	uint8_t DestNum=0;
+	acknow_signal=0;
 	forward_routing=FALSE;
 	
+//			sendData(Ack, sizeof(Ack));
+
   for(int i = 0; i < Nb_bytes; i++) {
     printf("%c", data_buffer[i]);
 		if (data_buffer[i]=='@')
 		{
 			//acknowledgment signal reachout STATE 2 
-			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
-			HAL_Delay(1000);
-			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	
+			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);					
+			HAL_Delay(500);
+			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);					
 			forward_routing=FALSE;
 			acknow_signal=TRUE;
+			set_connectable=1;
 			//add return
 		}
 	}
+	
 	//normal frame comming
 	if(!acknow_signal)
 	{
 		//checking if it be forwarded or just getting it out 
-		if (Process_frame_Deformulation(&SenderNum, &DestNum, data_buffer, Nb_bytes))
+		Process_frame_Deformulation(&SenderNum, &DestNum, data_buffer, Nb_bytes);
+		DestNum=data_buffer[3];
+		//getting frame STATE 3
+		if (DestNum==NodeNum+'0')
 		{
-
-			//getting frame STATE 3
-			if (DestNum==NodeNum+'0')
-			{
-				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
-				forward_routing=FALSE;
-				GettingData(data_buffer, Nb_bytes);
-				
-			
-			}
-			else //forward it STATE 1
-			{
-				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);				
-				HAL_Delay(2000);
-				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);	
-				forward_routing=TRUE;
-				ForwardFrame(data_buffer, Nb_bytes);	
-			}
+			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);	
+			BLE_Role = SERVER;
+			sendData(Ack, sizeof(Ack));
+		  acknow_signal=FALSE;
+			forward_routing=FALSE;
+			GettingData(data_buffer, Nb_bytes);
+		}
+		else //forward it STATE 1
+		{
+			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);		
+			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);				
+			HAL_Delay(1000);
+			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
+			BLE_Role = SERVER;
+			sendData(Ack, sizeof(Ack));
+		  acknow_signal=FALSE;			
+			forward_routing=TRUE;
+			ForwardFrame(data_buffer, Nb_bytes);	
 		}
 		
+//		ret=aci_gap_terminate(conn_handle, reason);
+//		if (ret != BLE_STATUS_SUCCESS) 
+//					HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);		
 		
   }
-	if(!acknow_signal)
-	{
-		sendData(Ack, sizeof(Ack));
-		acknow_signal=FALSE;
-	}
+
 	fflush(stdout);
 }
 

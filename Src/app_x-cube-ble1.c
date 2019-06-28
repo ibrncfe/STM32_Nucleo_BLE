@@ -28,18 +28,15 @@
 
 #define maxNodes	(4)
 
-
-
-
 #define Working 0 
 #define Failed 1 
 #define Freezed 2 
 
-#define LOCAL_NODE 1
+#define LOCAL_NODE 3
 #define NAME_NODE_SIZE (13)
 #define BDADDR_SIZE 6
 
-tBDAddr LOCAL_ADDR[]={ 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+//tBDAddr LOCAL_ADDR[]={ 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
 char LOCAL_NAME[NAME_NODE_SIZE];
 
 
@@ -53,7 +50,6 @@ tBDAddr Node_address_3[] = { 0x03, 0x00, 0x00, 0xE1, 0x80, 0xaa };
 const char Node_name_3[] = { AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','3' };
 
 
-
 //should be changed and in header
 //tBDAddr local_address[] = { 0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa };
 //const char local_name[] = { AD_TYPE_COMPLETE_LOCAL_NAME, 'N','O','D','E','N','R','G','_','0','0','0','1' };
@@ -64,6 +60,7 @@ static volatile uint8_t user_button_pressed = 0;
 
 BLE_RoleTypeDef BLE_Role = SERVER;
 uint8_t bdaddr[BDADDR_SIZE];
+tBDAddr bdaddr_r;
 
 extern volatile uint8_t set_connectable;
 extern volatile int     connected;
@@ -87,9 +84,57 @@ typedef struct Node
 }Node;
 
 
-struct Node nodes[4];
+struct Node nodes[3];
 
 /* Define Functions  -----------------------------------------------*/
+
+void initialize_Node(void)
+{
+	
+	nodes[0].name = "Node 1";
+	nodes[0].num = 1;
+	nodes[0].addr = Node_address_1;
+	nodes[0].local_name = Node_name_1;
+	nodes[0].state = Freezed;
+	nodes[0].distance = 1;
+	nodes[0].connected[0] = 2;
+
+	nodes[1].name = "Node 2";
+	nodes[1].num = 2;
+	nodes[1].addr = Node_address_2;
+	nodes[1].local_name = Node_name_2;
+	nodes[1].state = Freezed;
+	nodes[1].distance = 2;
+	nodes[1].connected[0] = 1;
+	nodes[1].connected[1] = 3;
+
+	nodes[2].name = "Node 3";
+	nodes[2].num = 3;
+	nodes[2].addr = Node_address_3;
+	nodes[2].local_name = Node_name_3;
+	nodes[2].state = Freezed;
+	nodes[2].distance = 2;
+	nodes[2].connected[0] = 2;
+	nodes[2].connected[1] = 4;
+
+	#if (LOCAL_NODE==1) 
+
+	memcpy(bdaddr, nodes[LOCAL_NODE-1].addr, 6);
+	memcpy(LOCAL_NAME,nodes[LOCAL_NODE-1].local_name,13);
+	// char local_name[]={ AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','1' };
+
+	#elif (LOCAL_NODE==2) 
+	memcpy(bdaddr, nodes[LOCAL_NODE-1].addr, 6);
+	memcpy(LOCAL_NAME,nodes[LOCAL_NODE-1].local_name,13);
+
+	#elif (LOCAL_NODE==3)
+	memcpy(bdaddr, nodes[LOCAL_NODE-1].addr, 6);
+	memcpy(LOCAL_NAME,nodes[LOCAL_NODE-1].local_name,13);
+
+	#endif
+
+}
+
 /*
  * BlueNRG-MS Initialization task
  */
@@ -119,8 +164,6 @@ void Process_BlueNRG_MS_Init(void)
     bnrg_expansion_board = IDB05A1; 
   }
   
-	BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
-
   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
                                   CONFIG_DATA_PUBADDR_LEN,
                                   bdaddr);
@@ -133,12 +176,7 @@ void Process_BlueNRG_MS_Init(void)
     printf("GATT_Init failed.\n");
   }
   
-//  if (BLE_Role == SERVER) {
   ret = aci_gap_init_IDB05A1(GAP_PERIPHERAL_ROLE_IDB05A1, 0, 0x07, &service_handle, &dev_name_char_handle, &appearance_char_handle);
-//  }
-//  else {
-//      ret = aci_gap_init_IDB05A1(GAP_CENTRAL_ROLE_IDB05A1, 0, 0x07, &service_handle, &dev_name_char_handle, &appearance_char_handle);
-//  }
   
   if (ret != BLE_STATUS_SUCCESS) {
     printf("GAP_Init failed.\n");
@@ -189,7 +227,7 @@ void Process_Mesh_Start_Listen_Connection(void)
   
   HAL_Delay(100);
   
-	BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
+	//BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
 
   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
                                   CONFIG_DATA_PUBADDR_LEN,
@@ -253,7 +291,7 @@ void Process_Mesh_Start_Listen_Connection(void)
  * @param  None
  * @retval None
  */
-void Process_Mesh_Start_BlueNRG_Connection(void)
+void Process_Mesh_Start_BlueNRG_Connection(uint8_t Dest_Node_Num)
 {
 	int ret;
 
@@ -263,7 +301,7 @@ void Process_Mesh_Start_BlueNRG_Connection(void)
   
   HAL_Delay(100);
     
-  BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
+  //BLUENRG_memcpy(bdaddr, LOCAL_ADDR, sizeof(LOCAL_ADDR));
  
 	ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
                                   CONFIG_DATA_PUBADDR_LEN,
@@ -310,31 +348,31 @@ void Process_Mesh_Start_BlueNRG_Connection(void)
   if (ret != BLE_STATUS_SUCCESS) {
 		HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);
   }
-	
-  //Set output power level
-  ret = aci_hal_set_tx_power_level(1,4);
 
 	BLE_Role = CLIENT;
 	printf("Client Create Connection\n");
 
 	//remote address
-	tBDAddr bdaddr = {0x02, 0x00, 0x00, 0xE1, 0x80, 0xaa};
-	//remote.addr=&bdaddr;
+	//tBDAddr bdaddr;
+
+	memcpy(bdaddr_r, nodes[Dest_Node_Num-1].addr, 6);
+	//tBDAddr bdaddr = {0x02, 0x00, 0x00, 0xE1, 0x80, 0xaa};
+
 	BSP_LED_On(LED2); //To indicate the start of the connection and discovery phase
 	
 	/*
 	Scan_Interval, Scan_Window, Peer_Address_Type, Peer_Address, Own_Address_Type, Conn_Interval_Min, 
 	Conn_Interval_Max, Conn_Latency, Supervision_Timeout, Conn_Len_Min, Conn_Len_Max    
 	*/
-	ret = aci_gap_create_connection(SCAN_P, SCAN_L, PUBLIC_ADDR, bdaddr, PUBLIC_ADDR, CONN_P1, CONN_P2, 0,
+	ret = aci_gap_create_connection(SCAN_P, SCAN_L, PUBLIC_ADDR, bdaddr_r, PUBLIC_ADDR, CONN_P1, CONN_P2, 0,
 																	SUPERV_TIMEOUT, CONN_L1 , CONN_L2); 
 	
 	if (ret != 0){
 		printf("Error while starting connection.\n");
-		HAL_Delay(100);
-    HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);
 	}
 	
+	connected=FALSE;
 }
 
 /**
@@ -395,13 +433,24 @@ void Process_BlueNRG_MS(void)
   if (set_connectable) 
   {
 		//should be changed
+		Process_BlueNRG_MS_Init();
 		Process_Mesh_Start_Listen_Connection();
     set_connectable = FALSE;
     user_button_init_state = BSP_PB_GetState(BUTTON_KEY);
+		HAL_GPIO_WritePin(GPIOB,LED11_Pin,GPIO_PIN_SET);
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(GPIOB,LED11_Pin,GPIO_PIN_RESET);
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(GPIOB,LED11_Pin,GPIO_PIN_SET);
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(GPIOB,LED11_Pin,GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
   }
 	
-	//THIS EMULATE THE PROCEDURE OF START CONTROL
+	//This start the notification process and authentication
 	Process_Enable_Notification_BlueNRG_MS();
+  hci_user_evt_proc();
 
 
   /* Check if the User Button has been pushed */
@@ -415,21 +464,61 @@ void Process_BlueNRG_MS(void)
     
     /* Debouncing */
     HAL_Delay(50);
-    
-    if (connected && notification_enabled)
-    {
-			/* Send a toggle command to the remote device */
-      uint8_t data[1] = {'p'};
-			Process_frame_formulation(1,2,data,sizeof(data));
-      //sendData(data, sizeof(data));
-    }
-    
+		
+    uint8_t data[1] = {'p'};
+
+		Process_Mesh_Start_BlueNRG_Connection(2);
+		
+		while(!(connected && notification_enabled))
+		{
+			Process_Enable_Notification_BlueNRG_MS();
+			hci_user_evt_proc();
+			HAL_Delay(100);
+			HAL_GPIO_TogglePin(GPIOB,LD3_Pin);
+			
+			if(notification_enabled)
+				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
+		}
+		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
+
+		
+		Process_frame_formulation(3,2,data,sizeof(data));
+		
     /* Reset the User Button flag */
     user_button_pressed = 0;
   }
 	
-  hci_user_evt_proc();
 
+}
+/**
+ * @brief  Initilization the full sending function
+ *
+ * @param  None
+ * @retval None
+ */
+void Process_Mesh_BlueNRG_Send_Node(uint8_t Dest_Node_Num, uint8_t* data_buffer, uint8_t Nb_bytes)
+{
+
+	Process_Mesh_Start_BlueNRG_Connection(Dest_Node_Num);
+
+	Process_Enable_Notification_BlueNRG_MS();
+
+	//while(!(connected && notification_enabled))
+	while (!(connected ))
+	{
+		//Process_Enable_Notification_BlueNRG_MS();
+		hci_user_evt_proc();
+	}
+	
+	Process_frame_formulation(LOCAL_NODE,Dest_Node_Num,data_buffer,sizeof(Nb_bytes));
+
+//	while(connected && notification_enabled)
+//	{
+//		Process_Enable_Notification_BlueNRG_MS();
+//		hci_user_evt_proc();		
+//	}
+	set_connectable=0;
+	
 }
 /**
  * @brief  Initialize User process.
@@ -456,6 +545,46 @@ void BSP_PB_Callback(Button_TypeDef Button)
   user_button_pressed = 1;
 }
 
+/**
+ * @brief  This function is used to formulate a mesh frame 
+ *         (to be sent over the air to the remote board).
+ * @param  data_buffer : pointer to data to be sent
+ * @param  Nb_bytes : number of bytes to send
+ * @retval None
+ */
+fPrccStatus Process_frame_Routing(uint8_t Currentnum, uint8_t* routedNum, uint8_t* frame_buffer, uint8_t Nb_bytes)
+{
+//	uint8_t SenderNum = frame_buffer[1] - '0';
+	uint8_t TargetNum = frame_buffer[3] - '0';
+	int j = 0; 
+	for (int i = 0; i < maxNodes; i++)
+	{
+		if (nodes[i].num == Currentnum) //if node is not exist
+		{
+			if (nodes[i].distance > 0) //if node hasn't connected with others
+			{
+				for (j = 0; j < nodes[i].distance; j++)
+				{
+					if (TargetNum == nodes[i].connected[j])
+					{
+						*routedNum = nodes[i].connected[j];
+						return FRM_OK;
+					}
+					else
+					{
+						*routedNum = 255;
+						return FRM_OK;
+					}
+
+				}
+			}
+		}
+	}
+
+//broadcasting
+*routedNum = 0;
+return FRM_ERR;
+}
 #ifdef __cplusplus
 }
 #endif

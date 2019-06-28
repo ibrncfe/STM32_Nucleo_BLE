@@ -43,6 +43,9 @@
  extern "C" {
 #endif 
 
+#define FRM_OK              1
+#define FRM_ERR             0
+
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
