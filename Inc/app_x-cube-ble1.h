@@ -29,7 +29,7 @@ void Process_Mesh_BlueNRG_Send_Node(uint8_t Dest_Node_Num, uint8_t* data_buffer,
 void Process_BlueNRG_MS(void);
 static void User_Init(void);
 void initialize_Node(void);
-const static uint8_t NodeNum=3;
+const static uint8_t NodeNum=2;
 
 
 

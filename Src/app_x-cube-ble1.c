@@ -32,7 +32,7 @@
 #define Failed 1 
 #define Freezed 2 
 
-#define LOCAL_NODE 3
+#define LOCAL_NODE 2
 #define NAME_NODE_SIZE (13)
 #define BDADDR_SIZE 6
 
@@ -128,8 +128,8 @@ void initialize_Node(void)
 	memcpy(LOCAL_NAME,nodes[LOCAL_NODE-1].local_name,13);
 
 	#elif (LOCAL_NODE==3)
-	memcpy(bdaddr, nodes[LOCAL_NODE-1].addr, 6);
-	memcpy(LOCAL_NAME,nodes[LOCAL_NODE-1].local_name,13);
+	const tBDAddr local_address[]={ 0x03, 0x00, 0x00, 0xE1, 0x80, 0xaa };
+	const char local_name[]={ AD_TYPE_COMPLETE_LOCAL_NAME,'N','O','D','E','N','R','G','_','0','0','0','3' };
 
 	#endif
 
@@ -408,22 +408,6 @@ void Process_Enable_Notification_BlueNRG_MS(void)
  * @param  None
  * @retval None
  */
-void Process_Routing_BlueNRG_MS(void) //1
-{
-/*
-NODE1	
-{'N','O','D','E','N','R','G','_','0','0','0','1'};
-{0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa};
-NODE2
-{'N','O','D','E','N','R','G','_','0','0','0','1'};
-{0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa};
-NODE3
-{'N','O','D','E','N','R','G','_','0','0','0','1'};
-{0x01, 0x00, 0x00, 0xE1, 0x80, 0xaa};	
-	
-	
-*/
-}
 
 /*
  * BlueNRG-MS background task
@@ -467,7 +451,7 @@ void Process_BlueNRG_MS(void)
 		
     uint8_t data[1] = {'p'};
 
-		Process_Mesh_Start_BlueNRG_Connection(2);
+		Process_Mesh_Start_BlueNRG_Connection(3);
 		
 		while(!(connected && notification_enabled))
 		{
@@ -477,12 +461,12 @@ void Process_BlueNRG_MS(void)
 			HAL_GPIO_TogglePin(GPIOB,LD3_Pin);
 			
 			if(notification_enabled)
-				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
 		}
 		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
 
 		
-		Process_frame_formulation(3,2,data,sizeof(data));
+		Process_frame_formulation(2,3,data,sizeof(data));
 		
     /* Reset the User Button flag */
     user_button_pressed = 0;

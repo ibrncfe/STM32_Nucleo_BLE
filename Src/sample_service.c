@@ -187,19 +187,21 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 	uint8_t DestNum=0;
 	acknow_signal=0;
 	forward_routing=FALSE;
-	
-//			sendData(Ack, sizeof(Ack));
 
   for(int i = 0; i < Nb_bytes; i++) {
     printf("%c", data_buffer[i]);
 		if (data_buffer[i]=='@')
 		{
 			//acknowledgment signal reachout STATE 2 
+			//BLE_Role = CLIENT;
 			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);					
 			HAL_Delay(500);
 			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);					
 			forward_routing=FALSE;
 			acknow_signal=TRUE;
+			ret=aci_gap_terminate(conn_handle, reason);
+			if (ret != BLE_STATUS_SUCCESS) 
+						HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);				
 			set_connectable=1;
 			//add return
 		}
@@ -217,9 +219,18 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);	
 			BLE_Role = SERVER;
 			sendData(Ack, sizeof(Ack));
+			uint16_t holdTime=1000;
+			while(holdTime>0)
+			{
+				Process_Enable_Notification_BlueNRG_MS();
+				hci_user_evt_proc();
+				HAL_Delay(1);
+				holdTime--;
+			}
 		  acknow_signal=FALSE;
 			forward_routing=FALSE;
 			GettingData(data_buffer, Nb_bytes);
+			set_connectable=1;
 		}
 		else //forward it STATE 1
 		{
@@ -230,15 +241,28 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
 			BLE_Role = SERVER;
 			sendData(Ack, sizeof(Ack));
+			uint16_t holdTime=1000;
+			while(holdTime>0)
+			{
+				Process_Enable_Notification_BlueNRG_MS();
+				hci_user_evt_proc();
+				HAL_Delay(1);
+				holdTime--;
+			}			
 		  acknow_signal=FALSE;			
 			forward_routing=TRUE;
+			BLE_Role = CLIENT;
 			ForwardFrame(data_buffer, Nb_bytes);	
+			holdTime=1000;
+			while(holdTime>0)
+			{
+				Process_Enable_Notification_BlueNRG_MS();
+				hci_user_evt_proc();
+				HAL_Delay(1);
+				holdTime--;
+			}			
+			set_connectable=1;
 		}
-		
-//		ret=aci_gap_terminate(conn_handle, reason);
-//		if (ret != BLE_STATUS_SUCCESS) 
-//					HAL_GPIO_WritePin(GPIOB, LED11_Pin, GPIO_PIN_SET);		
-		
   }
 
 	fflush(stdout);
@@ -251,10 +275,33 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
  * @param  Nb_bytes : number of bytes to send
  * @retval None
  */
-fPrccStatus ForwardFrame(uint8_t* data_buffer, uint8_t Nb_bytes)
+fPrccStatus ForwardFrame(uint8_t* frame_buffer, uint8_t Nb_bytes)
 {
-	//Process_Mesh_Start_Listen_Connection();
+	uint8_t Dest_num;
+	Dest_num=frame_buffer[3]-'0';
+	/////
+	Process_BlueNRG_MS_Init();
+	HAL_Delay(500);
+	Process_Mesh_Start_Listen_Connection();
+	HAL_Delay(1000);
+	Process_Mesh_Start_BlueNRG_Connection(Dest_num);
+	/////
+	while(!(connected && notification_enabled))
+	{	
+		Process_Enable_Notification_BlueNRG_MS();
+		hci_user_evt_proc();
+		HAL_Delay(100);
+		HAL_GPIO_TogglePin(GPIOB,LD3_Pin);
+		
+		if(notification_enabled)
+			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
+	}
+	
+  uint8_t data[1] = {'p'};	
+	HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
+	Process_frame_formulation(2,3,data,sizeof(data));
 
+	sendData(frame_buffer,Nb_bytes);
 
 	return FRM_OK;	
 }

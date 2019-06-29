@@ -57,19 +57,13 @@ int main(void)
   MX_USB_PCD_Init();  
   Process_BlueNRG_MS_Init();
 	Process_Mesh_Start_Listen_Connection();
-	//HAL_Delay(5000);
 
 	set_connectable=1;
 
   while (1)
   {
 		Process_BlueNRG_MS();
-			
-//		HAL_Delay(1);
-//		if (++times==2000) 
-//		{	
-//			set_connectable=0;
-//		} 
+		
 		
 	}
 }
