@@ -451,28 +451,12 @@ void Process_BlueNRG_MS(void)
 		
     uint8_t data[1] = {'p'};
 
-		Process_Mesh_Start_BlueNRG_Connection(3);
-		
-		while(!(connected && notification_enabled))
-		{
-			Process_Enable_Notification_BlueNRG_MS();
-			hci_user_evt_proc();
-			HAL_Delay(100);
-			HAL_GPIO_TogglePin(GPIOB,LD3_Pin);
-			
-			if(notification_enabled)
-				HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
-		}
-		HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
-
-		
-		Process_frame_formulation(2,3,data,sizeof(data));
+		Process_Mesh_BlueNRG_Send_Node(3,data,sizeof(data));
 		
     /* Reset the User Button flag */
     user_button_pressed = 0;
   }
 	
-
 }
 /**
  * @brief  Initilization the full sending function
@@ -484,23 +468,21 @@ void Process_Mesh_BlueNRG_Send_Node(uint8_t Dest_Node_Num, uint8_t* data_buffer,
 {
 
 	Process_Mesh_Start_BlueNRG_Connection(Dest_Node_Num);
-
-	Process_Enable_Notification_BlueNRG_MS();
-
-	//while(!(connected && notification_enabled))
-	while (!(connected ))
-	{
-		//Process_Enable_Notification_BlueNRG_MS();
-		hci_user_evt_proc();
-	}
 	
+	while(!(connected && notification_enabled))
+	{
+		Process_Enable_Notification_BlueNRG_MS();
+		hci_user_evt_proc();
+		HAL_Delay(100);
+		HAL_GPIO_TogglePin(GPIOB,LD3_Pin);
+		
+		if(notification_enabled)
+			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
+	}
+	HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
+
 	Process_frame_formulation(LOCAL_NODE,Dest_Node_Num,data_buffer,sizeof(Nb_bytes));
 
-//	while(connected && notification_enabled)
-//	{
-//		Process_Enable_Notification_BlueNRG_MS();
-//		hci_user_evt_proc();		
-//	}
 	set_connectable=0;
 	
 }

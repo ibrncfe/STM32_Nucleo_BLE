@@ -193,7 +193,6 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 		if (data_buffer[i]=='@')
 		{
 			//acknowledgment signal reachout STATE 2 
-			//BLE_Role = CLIENT;
 			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);					
 			HAL_Delay(500);
 			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);					
@@ -211,14 +210,16 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 	if(!acknow_signal)
 	{
 		//checking if it be forwarded or just getting it out 
-		Process_frame_Deformulation(&SenderNum, &DestNum, data_buffer, Nb_bytes);
-		DestNum=data_buffer[3];
+		if(Process_frame_Deformulation(&SenderNum, &DestNum, data_buffer, Nb_bytes))
+		{
+			DestNum=data_buffer[3];
 		//getting frame STATE 3
 		if (DestNum==NodeNum+'0')
 		{
 			HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_SET);	
 			BLE_Role = SERVER;
 			sendData(Ack, sizeof(Ack));
+			//wait until send
 			uint16_t holdTime=1000;
 			while(holdTime>0)
 			{
@@ -241,6 +242,7 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
 			BLE_Role = SERVER;
 			sendData(Ack, sizeof(Ack));
+			//wait until send
 			uint16_t holdTime=1000;
 			while(holdTime>0)
 			{
@@ -263,13 +265,14 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 			}			
 			set_connectable=1;
 		}
+	}
   }
 
 	fflush(stdout);
 }
 
 /**
- * @brief  This function is used to formulate a mesh frame 
+ * @brief  This function is used to forward a frame on a mesh network
  *         (to be sent over the air to the remote board).
  * @param  data_buffer : pointer to data to be sent
  * @param  Nb_bytes : number of bytes to send
