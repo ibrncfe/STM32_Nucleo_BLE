@@ -281,14 +281,16 @@ void receiveData(uint8_t* data_buffer, uint8_t Nb_bytes)
 fPrccStatus ForwardFrame(uint8_t* frame_buffer, uint8_t Nb_bytes)
 {
 	uint8_t Dest_num;
+	uint8_t Src_num;
 	Dest_num=frame_buffer[3]-'0';
-	/////
+	Src_num=frame_buffer[1]-'0';
+	
 	Process_BlueNRG_MS_Init();
-	HAL_Delay(500);
+	HAL_Delay(200);
 	Process_Mesh_Start_Listen_Connection();
-	HAL_Delay(1000);
+	HAL_Delay(200);
 	Process_Mesh_Start_BlueNRG_Connection(Dest_num);
-	/////
+	
 	while(!(connected && notification_enabled))
 	{	
 		Process_Enable_Notification_BlueNRG_MS();
@@ -299,31 +301,44 @@ fPrccStatus ForwardFrame(uint8_t* frame_buffer, uint8_t Nb_bytes)
 		if(notification_enabled)
 			HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);		
 	}
-	
-  uint8_t data[1] = {'p'};	
+		
 	HAL_GPIO_WritePin(GPIOB, LD3_Pin, GPIO_PIN_RESET);
-	Process_frame_formulation(2,3,data,sizeof(data));
 
-	sendData(frame_buffer,Nb_bytes);
+	uint8_t size_data=Nb_bytes-6;
+	uint8_t* Data = (uint8_t *) malloc(size_data * sizeof(uint8_t));
 
+	for (int i = 5; i < size_data; ++i)
+		Data[i] = frame_buffer[i];
+	Process_frame_formulation(Src_num,Dest_num,Data,size_data);
+	free(Data);
+	
 	return FRM_OK;	
 }
 
 /**
- * @brief  This function is used to formulate a mesh frame 
+ * @brief  This function is used to gettint data from a mesh network 
  *         (to be sent over the air to the remote board).
  * @param  data_buffer : pointer to data to be sent
  * @param  Nb_bytes : number of bytes to send
  * @retval None
  */
-fPrccStatus GettingData(uint8_t* data_buffer, uint8_t Nb_bytes)
+fPrccStatus GettingData(uint8_t* frame_buffer, uint8_t Nb_bytes)
 {
+	uint8_t Dest_num;
+	uint8_t Src_num;
+	Dest_num=frame_buffer[3]-'0';
+	Src_num=frame_buffer[1]-'0';
+	
+	uint8_t size_data=Nb_bytes-6;
+	uint8_t* Data = (uint8_t *) malloc(size_data * sizeof(uint8_t));
 
+	for (int i = 5; i < size_data; ++i)
+		Data[i] = frame_buffer[i];
+	
+	free(Data);
+	
 	return FRM_OK;
 }
-
-
-
 
 /**
  * @brief  This function is used to formulate a mesh frame 
@@ -345,18 +360,18 @@ length = 1+1+1+1+1+data_buffer+1=6+Nb_bytes
 	}
 
 	const uint8_t sz = Nb_bytes + 6;
-//	const uint8_t preamble = '#';
-//	const uint8_t trail = '*';
+	const uint8_t preamble = '#';
+	const uint8_t trail = '*';
 	int i = 0;
 	
-	uint8_t fr[] = { '#' , Currentnum + '0' ,'#' , Targetnum + '0', '#' };
+	uint8_t fr[] = { preamble , Currentnum + '0' ,preamble , Targetnum + '0', preamble };
 	uint8_t n = sizeof(fr);
 	uint8_t* A = (uint8_t *) malloc(sz * sizeof(uint8_t));
 	for (i = 0; i < n; ++i)
 		A[i] = fr[i];
 	for (i = 0; i < Nb_bytes; ++i)
 		A[i+ n] = data_buffer[i];
-	A[sz-1] = '*';
+	A[sz-1] = trail;
 
 	sendData(A,sz);
 	
@@ -366,7 +381,7 @@ length = 1+1+1+1+1+data_buffer+1=6+Nb_bytes
 }
 
 /**
- * @brief  This function is used to formulate a mesh frame 
+ * @brief  This function is used to deformulate a mesh frame and checking process
  *         (to be sent over the air to the remote board).
  * @param  data_buffer : pointer to data to be sent
  * @param  Nb_bytes : number of bytes to send
